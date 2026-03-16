@@ -1,0 +1,17 @@
+{
+  "name": "@phoenix/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir dist",
+    "start": "bun dist/index.js"
+  },
+  "dependencies": {
+    "hono": "latest"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

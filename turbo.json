@@ -1,0 +1,27 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalDependencies": ["**/.env", "**/.env.local"],
+  "tasks": {
+    "build": {
+      "description": "Build application",
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"],
+      "cache": true
+    },
+    "dev": {
+      "description": "Start dev server",
+      "cache": false,
+      "interactive": true
+    },
+    "test": {
+      "description": "Run tests",
+      "cache": true,
+      "outputs": ["coverage/**"]
+    },
+    "lint": {
+      "description": "Lint codebase",
+      "cache": true
+    }
+  }
+}
