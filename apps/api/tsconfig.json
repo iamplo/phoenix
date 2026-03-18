@@ -4,7 +4,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@phoenix/api/*": ["./src/*"]
+      "@phoenix/api/*": ["./src/*"],
+      "@phoenix/types": ["../../packages/types/src"]
     }
   }
 }

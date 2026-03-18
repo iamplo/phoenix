@@ -9,7 +9,8 @@
     "paths": {
       "#/*": ["./src/*"],
       "@/*": ["./src/*"],
-      "@phoenix/ui": ["../../packages/ui/src"]
+      "@phoenix/ui": ["../../packages/ui/src"],
+      "@phoenix/types": ["../../packages/types/src"]
     },
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["vite/client"]

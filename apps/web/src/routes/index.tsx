@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
-    const response = await client.api.health.$get()
+    const response = await client.api.v1.health.$get()
     const data = await response.json()
     return data
   },

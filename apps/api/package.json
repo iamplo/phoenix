@@ -9,6 +9,7 @@
     "start": "bun dist/index.js"
   },
   "dependencies": {
+    "@phoenix/types": "workspace:*",
     "hono": "latest"
   },
   "devDependencies": {
