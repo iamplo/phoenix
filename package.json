@@ -11,6 +11,7 @@
     "lint": "turbo run lint"
   },
   "devDependencies": {
+    "supabase": "^2.81.3",
     "turbo": "latest"
   },
   "workspaces": [
