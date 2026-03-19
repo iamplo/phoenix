@@ -8,14 +8,14 @@ export interface Project {
   // Status & Timeline ------------------
   status: ProjectStatus;
   phases: Phase[];
-  tineline: Timeline;
+  timeline: Timeline;
 
   // Details -------------------------
   buildingDetails: BuildingDetails;
   unitMix: UnitType[];
   amenities: {
-    buldingAmenities: Ammenity[];
-    unitAmenities: Ammenity[];
+    building: Amenity[];
+    units: Amenity[];
   };
 
   // Financial ------------------------
@@ -26,7 +26,8 @@ export interface Project {
   //Marketing --------------------------
   media: MediaAsset[];
   documents: Document[];
-  website: string;
+  website?: string;
+  marketingName: string;
 
   //Sales ------------------------------
   inventory: InventoryStats;
@@ -42,7 +43,7 @@ export interface Project {
   // Metadata --------------------------
   createdAt: Date;
   updatedAt: Date;
-  lastSyncedAt: Date;
+  // lastSyncedAt: Date;
   // notes: Note[]
 }
 
@@ -69,7 +70,7 @@ export interface Timeline {
   firstClosing?: Date;
   finalClosing?: Date;
   projectCompletion?: Date;
-  milestoneHistory: [];
+  // milestones: [];
 }
 
 export interface Address {
@@ -89,7 +90,7 @@ export interface BuildingDetails {
   totalUnits: number;
   totalFloors: string;
   yearBuilt: string;
-  architect: number;
+  architect: string;
   buildingClass: "Luxury" | "Mid-Market" | "Affordable";
   buildingType: "Condo" | "Co-op" | "Rental" | "Mixed-Use";
   zoning: string;
@@ -151,6 +152,7 @@ interface TaxInfo {
 }
 
 interface Contact {
+  id: string;
   role: string;
   name: string;
   company?: string;
@@ -178,7 +180,8 @@ interface Requirements {
   llcRestrictions?: string;
 }
 
-interface Ammenity {
+interface Amenity {
+  id: string;
   name: string;
   category: string;
   included: boolean;
@@ -253,7 +256,7 @@ interface Document {
 type DocumentType =
   | "Offering Plan"
   | "Floor Plan"
-  | "Ammendment"
+  | "Amendment"
   | "Marketing Brochure"
   | "Fact Sheet"
   | "Pricing Sheet"
