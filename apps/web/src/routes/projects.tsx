@@ -1,12 +1,22 @@
 import { client } from "#/lib/api";
 import { createFileRoute } from '@tanstack/react-router'
 
+//  Need to cast to a simplified typ
+// const getData = createServerFn().handler(async () => {
+//     const response = await client.api.v1.projects.$get()
+//     console.log('Projects loader response:', response)
+//     const { data } = await response.json()
+//     return data as Projects[]
+// })
+
 export const Route = createFileRoute('/projects')({
   loader: async () => {
     const response = await client.api.v1.projects.$get()
+    console.log('Projects loader response:', response)
     const data = await response.json()
     return data
   },
+  // loader: () => getData(),
   component: Projects,
   // beforeLoad: () => {
   //   console.log('Executes on the server during the initial request')
@@ -19,7 +29,7 @@ export const Route = createFileRoute('/projects')({
 })
 
 function Projects() {
-  // const { data } = Route.useLoaderData()
+  const data = Route.useLoaderData()
 
   return (
     <div className="">
@@ -27,7 +37,8 @@ function Projects() {
         Projects
       </h1>
       <p className="">
-        par
+        {data.data.length} projects found
+      
       </p>
     </div>
   );

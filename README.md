@@ -14,6 +14,7 @@ Check workspaces are recognized correctly (optional)
 - Bun: Must be installed (curl -fsSL https://bun.sh/install | bash)
 - Node.js: Not strictly required since you are using Bun, but some Turbo
   features may look for a system Node version as a fallback.
+- Docker to run Supabase locally.
 - Global Turbo (Optional): If they want to type turbo instead of bun x turbo, they can run bun install -g turbo.
 
 ## Development
@@ -39,27 +40,44 @@ bun x turbo run dev --filter @phoenix/api
 - Monorepo usng Turborepo
   - /web
   - /api
+  - /db
+  - /types (shared types between frontend and backend)
 - Bun runtime and package management
 - Hono Backend
 - TanStack Start - Fullstack React SSR
+- Postgres Database with Supabase
+# Database
 
-**Recommended ORM** 
+Supabase provides a hosted Postgres database.
 
-Check out [Drizzle](https://orm.drizzle.team
-) 
+**Local development**
 
-**Optionally add a Shared UI Package**
-
+Make sure Docker is installed on you machine and running. 
+To start and stop run:
 ```bash
-mkdir -p packages/ui/src
+# Start Supabase
+bun supabase start
+
+# Optional
+# --ignore-health-check
+# -x, --exclude <strings>
+# Names of containers to not start. [gotrue,realtime,storage-api,imgproxy,kong,mailpit,postgrest,postgres-meta,studio,edge-runtime,logflare,vector,supavisor]
+
+# Stop Supabase
+bun supabase stop
 ```
-```json
-# add to imports apps/web/packagejson: 
-  "imports": {
-    "#/*": "./src/*",
-    "@phoenix/ui": "../packages/ui/src"
-  }
+
+## Type safe SQL with Kysely
+
+Kysely is a type-safe SQL query builder for TypeScript. I considered [Drizzle](https://orm.drizzle.team
+) ORM but the introspection was buggy with custom types and didn't want to to commit to a full ORM yet.
+
+To generate the types from the database run:
+```bash
+bun run introspection
 ```
+Kysely configuration is located in `@packages/db/kysely.config.ts` 
+
 
 ## Building For Production (TODO)
 

@@ -1,0 +1,28 @@
+{
+  "name": "@phoenix/db",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "introspect": "kysely-codegen --config-file ./kysely.config.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema/index.ts"
+  },
+  "module": "index.ts",
+  "devDependencies": {
+    "@types/pg": "^8.20.0",
+    "dotenv": "latest",
+    "kysely-codegen": "^0.20.0",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "kysely": "^0.28.14",
+    "kysely-postgres-js": "^3.0.0",
+    "pg": "^8.20.0"
+  }
+}

@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@phoenix/types": "workspace:*",
-    "hono": "latest"
+    "@phoenix/db": "workspace:*",
+    "hono": "^4.12.8"
   },
   "devDependencies": {
     "typescript": "^5.7.2"
