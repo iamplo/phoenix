@@ -1,27 +1,49 @@
 import type { Context } from "hono"
-import { projectService } from "../services/project.service"
+import { ProjectService } from "../services/project.service"
+import { ValidationError } from "../lib/errors"
 
-export const projectHandler = {
-  getAll: async (c: Context) => {
-    const projects = await projectService.getAll()
+// Validate request shape/params. Let services throw typed domain/data problems
+
+export class ProjectHandler {
+  public static async getAll(c: Context) {
+    const projects = await ProjectService.getAll()
     return c.json({ success: true, data: projects })
-  },
-  new: async (c: Context) => {
+  }
+
+  public static async new(c: Context) {
     const project = await c.req.json()
-    const newProject = await projectService.new(project)
+    const newProject = await ProjectService.new(project)
     return c.json({ success: true, data: newProject })
-  },
-  show: async (c: Context) => {
+  }
+
+  public static async show(c: Context) {
     const id = c.req.param('id')
     if (!id) {
-      return c.json({ success: false, message: 'Project ID is required' }, 400)
+      throw new ValidationError("Project ID is required")
     }
-    const project = await projectService.show(id)
+
+    const project = await ProjectService.show(id)
     return c.json({ success: true, data: project })
-  },
-  edit: async (c: Context) => {
+  }
+  
+  public static async edit(c: Context) {
+    const id = c.req.param('id')
+    if (!id) {
+      throw new ValidationError("Project ID is required")
+    }
+
     const project = await c.req.json()
-    const updatedProject = await projectService.edit(project)
+    const updatedProject = await ProjectService.edit(id, project)
     return c.json({ success: true, data: updatedProject })
+  }
+
+  public static async delete(c: Context) {
+    const id = c.req.param('id')
+    if (!id) {
+      throw new ValidationError("Project ID is required")
+    }
+
+    const deletedProject = await ProjectService.delete(id)
+    return c.json({ success: true, data: deletedProject })
   }
 }
