@@ -2,7 +2,7 @@ import type { Context } from "hono"
 import { ProjectService } from "../services/project.service"
 import { ValidationError } from "../lib/errors"
 
-// Validate request shape/params. Let services throw typed domain/data problems
+// Validate request shape/params.
 
 export class ProjectHandler {
   public static async getAll(c: Context) {
