@@ -9,8 +9,9 @@
     "start": "bun dist/index.js"
   },
   "dependencies": {
-    "@phoenix/types": "workspace:*",
+    "@hono/zod-openapi": "^1.3.0",
     "@phoenix/db": "workspace:*",
+    "@phoenix/types": "workspace:*",
     "hono": "^4.12.8"
   },
   "devDependencies": {

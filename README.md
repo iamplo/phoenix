@@ -11,9 +11,10 @@ Check workspaces are recognized correctly (optional)
 `bun x turbo run dev --dry`
 
 **Prerequisities for Developer**
-- Bun: Must be installed (curl -fsSL https://bun.sh/install | bash)
+
+- Bun: Must be installed (curl -fsSL [https://bun.sh/install](https://bun.sh/install) | bash)
 - Node.js: Not strictly required since you are using Bun, but some Turbo
-  features may look for a system Node version as a fallback.
+features may look for a system Node version as a fallback.
 - Docker to run Supabase locally.
 - Global Turbo (Optional): If they want to type turbo instead of bun x turbo, they can run bun install -g turbo.
 
@@ -37,6 +38,7 @@ bun x turbo run dev --filter @phoenix/api
 ```
 
 # Stack
+
 - Monorepo usng Turborepo
   - /web
   - /api
@@ -46,6 +48,7 @@ bun x turbo run dev --filter @phoenix/api
 - Hono Backend
 - TanStack Start - Fullstack React SSR
 - Postgres Database with Supabase
+
 # Database
 
 Supabase provides a hosted Postgres database.
@@ -54,6 +57,7 @@ Supabase provides a hosted Postgres database.
 
 Make sure Docker is installed on you machine and running. 
 To start and stop run:
+
 ```bash
 # Start Supabase
 bun supabase start
@@ -69,15 +73,15 @@ bun supabase stop
 
 ## Type safe SQL with Kysely
 
-Kysely is a type-safe SQL query builder for TypeScript. I considered [Drizzle](https://orm.drizzle.team
-) ORM but the introspection was buggy with custom types and didn't want to to commit to a full ORM yet.
+Kysely is a type-safe SQL query builder for TypeScript. I considered [Drizzle](https://orm.drizzle.team) ORM but the introspection was buggy with custom types and didn't want to to commit to a full ORM yet.
 
 To generate the types from the database run:
+
 ```bash
 bun run introspection
 ```
-Kysely configuration is located in `@packages/db/kysely.config.ts` 
 
+Kysely configuration is located in `@packages/db/kysely.config.ts` 
 
 ## Building For Production (TODO)
 
@@ -95,7 +99,8 @@ This project uses [Vitest](https://vitest.dev/) for testing. You can run the tes
 bun --bun run test
 ```
 
-# Tanstack Start 
+# Tanstack Start
+
 The React SSR framework
 
 ## Styling
@@ -110,7 +115,6 @@ If you prefer not to use Tailwind CSS:
 2. Replace the Tailwind import in `src/styles.css` with your own styles
 3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
 4. Uninstall the packages: `bun install @tailwindcss/vite tailwindcss -D`
-
 
 ## Routing
 
@@ -263,4 +267,3 @@ Files prefixed with `demo` can be safely deleted. They are there to provide a st
 You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
 
 For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
-
