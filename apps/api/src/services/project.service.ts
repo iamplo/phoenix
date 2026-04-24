@@ -1,10 +1,11 @@
 import { db } from "@phoenix/db";
 import { NotFoundError, ValidationError } from "../lib/errors"
+import type { CreateProjectBody } from "@phoenix/types";
 
-type NewProjectInput = Record<string, unknown>
 type UpdateProjectInput = Record<string, unknown>
 
-// Throw domain errors, i.e. NotFoundError, ValidationError
+// Business rules, DB logic
+
 export class ProjectService {
   public static async getAll() {
     const projects = db.selectFrom("projects");
@@ -21,14 +22,10 @@ export class ProjectService {
     return project
   }
 
-  public static async new(project: NewProjectInput) {
-    if (!project || typeof project !== "object") {
-      throw new ValidationError("Project payload is required")
-    }
-
+  public static async new(input: CreateProjectBody) {
     return db
       .insertInto("projects")
-      .values(project as never)
+      .values(input as never)
       .returningAll()
       .executeTakeFirstOrThrow()
   }

@@ -1,49 +1,40 @@
-import type { Context } from "hono"
+import type { CreateProjectBody, Project } from '@phoenix/types'
 import { ProjectService } from "../services/project.service"
 import { ValidationError } from "../lib/errors"
 
-// Validate request shape/params.
+// Handler 
+// - Orchestrates service calls, map response DTOs
+// - prefer receiving typed parsed input from route
 
 export class ProjectHandler {
-  public static async getAll(c: Context) {
-    const projects = await ProjectService.getAll()
-    return c.json({ success: true, data: projects })
+  public static async getAll() {
+    const rows = await ProjectService.getAll()
+    const projects: Project[] = rows.map((row) => ({
+      ...row,
+      amenities: row.amenities,
+      timeline: row.timeline,
+    }))
+    return projects
   }
 
-  public static async new(c: Context) {
-    const project = await c.req.json()
-    const newProject = await ProjectService.new(project)
-    return c.json({ success: true, data: newProject })
+  public static async new(input: CreateProjectBody) {
+    return  ProjectService.new(input)
   }
 
-  public static async show(c: Context) {
-    const id = c.req.param('id')
-    if (!id) {
-      throw new ValidationError("Project ID is required")
-    }
-
+  public static async show(id: string) {
     const project = await ProjectService.show(id)
-    return c.json({ success: true, data: project })
+    return project
   }
   
-  public static async edit(c: Context) {
-    const id = c.req.param('id')
+  public static async edit(id: string) {
     if (!id) {
       throw new ValidationError("Project ID is required")
     }
 
-    const project = await c.req.json()
-    const updatedProject = await ProjectService.edit(id, project)
-    return c.json({ success: true, data: updatedProject })
   }
 
-  public static async delete(c: Context) {
-    const id = c.req.param('id')
-    if (!id) {
-      throw new ValidationError("Project ID is required")
-    }
-
+  public static async delete(id: string) {
     const deletedProject = await ProjectService.delete(id)
-    return c.json({ success: true, data: deletedProject })
+    return deletedProject
   }
 }
