@@ -8,6 +8,10 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "@phoenix/db": "workspace:*"
+    "@phoenix/db": "workspace:*",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "kysely": "^0.28.14"
   }
 }
